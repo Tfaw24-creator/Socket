@@ -1,0 +1,2 @@
+port=8002
+document_root=/home/kali/Documents/Project System/Http serveur/htdocs/
