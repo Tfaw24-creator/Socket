@@ -1,0 +1,143 @@
+### To-Do List pour le Projet Web - TP Préparation Examen Décembre 2024
+
+---
+
+#### **Travail de Membre 1 : Gestion des Trajets et Véhicules**
+
+##### **Page : Gestion des trajets**
+
+###### **Affichage**
+- Formulaire pour saisir :
+  - Date et heure de début du trajet.
+  - Date et heure de fin du trajet.
+  - Montant de la recette.
+  - Montant du carburant.
+  - Distance parcourue (en km).
+- Liste des trajets enregistrés avec :
+  - Véhicule.
+  - Chauffeur.
+  - Date/heure de début et de fin.
+  - Recette.
+  - Carburant.
+  - Distance.
+
+###### **Fonction**
+- Enregistrer les trajets dans la base de données.
+- Valider les champs du formulaire.
+- Éditer ou supprimer un trajet existant.
+
+###### **Data**
+- Table `Trajets` :
+  - id (Primary Key).
+  - vehicule\_id (Foreign Key vers table `Vehicules`).
+  - chauffeur\_id (Foreign Key vers table `Chauffeurs`).
+  - date\_debut (timestamp).
+  - date\_fin (timestamp).
+  - recette (float).
+  - carburant (float).
+  - distance (float).
+
+###### **Intégration**
+- Lier les champs du formulaire avec les colonnes de la base de données.
+- Afficher dynamiquement la liste des trajets à partir de la base.
+- Permettre la navigation vers la page de gestion des chauffeurs ou véhicules.
+
+##### **Page : Gestion des véhicules**
+
+###### **Affichage**
+- Formulaire pour ajouter ou éditer un véhicule :
+  - Marque.
+  - Modèle.
+  - Kilomètres totaux.
+  - Statut (disponible/en panne).
+- Liste des véhicules avec :
+  - ID.
+  - Marque et modèle.
+  - Kilomètres effectués.
+  - Statut actuel.
+
+###### **Fonction**
+- Ajouter un nouveau véhicule.
+- Modifier les informations d’un véhicule.
+- Afficher uniquement les véhicules disponibles à une date donnée.
+
+###### **Data**
+- Table `Vehicules` :
+  - id (Primary Key).
+  - marque (string).
+  - modele (string).
+  - km\_total (float).
+  - statut (boolean).
+
+###### **Intégration**
+- Mettre à jour la base de données lors de l’ajout ou l’édition d’un véhicule.
+- Relier les véhicules enregistrés avec les trajets.
+- Permettre un filtrage par disponibilité dans l’affichage des véhicules.
+
+---
+
+#### **Travail de Membre 2 : Gestion des Chauffeurs et Rapports**
+
+##### **Page : Gestion des chauffeurs**
+
+###### **Affichage**
+- Formulaire pour ajouter ou éditer un chauffeur :
+  - Nom.
+  - Prénom.
+  - Affectation à un véhicule.
+- Liste des chauffeurs avec :
+  - ID.
+  - Nom et prénom.
+  - Véhicule actuel.
+
+###### **Fonction**
+- Ajouter un nouveau chauffeur.
+- Modifier les informations d’un chauffeur.
+- Calculer le salaire journalier des chauffeurs.
+  - Règle : 25% si recette > montant minimum, sinon 8%.
+- Garder une trace des anciens salaires même après changement des règles.
+
+###### **Data**
+- Table `Chauffeurs` :
+  - id (Primary Key).
+  - nom (string).
+  - prenom (string).
+  - vehicule\_id (Foreign Key vers table `Vehicules`).
+- Table `Salaires` :
+  - id (Primary Key).
+  - chauffeur\_id (Foreign Key vers table `Chauffeurs`).
+  - date (timestamp).
+  - montant (float).
+  - pourcentage (float).
+
+###### **Intégration**
+- Relier les chauffeurs aux véhicules et trajets.
+- Calculer et afficher dynamiquement les salaires dans l’interface.
+- Permettre l’export des données de salaires.
+
+##### **Page : Gestion des rapports**
+
+###### **Affichage**
+- Rapport des bénéfices par jour et par véhicule.
+- Liste des trajets les plus rentables par jour.
+- Rapport sur les taux de pannes par mois.
+
+###### **Fonction**
+- Calculer les bénéfices totaux par jour.
+- Identifier les trajets les plus rentables.
+- Calculer le pourcentage de pannes par mois.
+  - Règle : un véhicule doit travailler 25 jours par mois.
+
+###### **Data**
+- Table `Rapports` : (optionnelle pour pré-calcul des données)
+  - id (Primary Key).
+  - date (timestamp).
+  - vehicule\_id (Foreign Key vers table `Vehicules`).
+  - benefice\_total (float).
+
+###### **Intégration**
+- Implémenter les calculs à partir des données des tables `Trajets` et `Pannes`.
+- Générer dynamiquement les rapports sous forme de tableaux ou graphiques.
+- Permettre l’export des rapports en CSV ou PDF.
+
+
